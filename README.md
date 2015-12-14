@@ -25,10 +25,10 @@ To install the package, issue the following commands from R:
 * insert following lines before making a connection
 
     .jinit()
-    C&#35; path of JDBC driver:
+    &#35; path of JDBC driver:
     path.jdbcdriver <- "/path/to/jars"
     class.jdbcdriver <- paste0(path.jdbcdriver, c("terajdbc4.jar", "tdgssconfig.jar"), collapse = ";")
-    C&#35; for this to work on a unix-like OS, class path needs to be added:
-    .jclassPath()  ## check class path
+    &#35; for this to work on a unix-like OS, class path needs to be added:
+    .jclassPath()  &#35; check class path
     .jaddClassPath(paste0(path.jdbcdriver, "terajdbc4.jar"))
     .jaddClassPath(paste0(path.jdbcdriver, "tdgssconfig.jar"))
