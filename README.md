@@ -3,21 +3,32 @@ teradataR
 
 R package to perform in-database analytics using Teradata database.
 
-Compatible with both R version 2 and 3.
-
-Prebuilt package could be found [here](https://github.com/Teradata/teradataR/raw/master/build/teradataR_1.1.0.tar.gz).
+Should be compatible with both R version 2 and 3.
 
 ## Dependencies
 
 + RJDBC
  + rJava
-+ RODBC
++ RODBC?
 
 ## Installation
 
-To install the package, issue the following command from R REPL:
+To install the package, issue the following commands from R:
 
-    install.packages("C:\\Documents and Settings\\User\\My Documents\\Downloads\\teradataR_1.1.0.tar.gz", repos=NULL,type="source");
+    install.packages("devtools")
+    library("devtools")
+    install_github('KarolTx/teradataR)
 
-Where first argument is the path to the package file.
+## Usage on Linux
 
+* download Teradata JDBC driver
+* insert following lines before making a connection
+
+    .jinit()
+    C&#35; path of JDBC driver:
+    path.jdbcdriver <- "/path/to/jars"
+    class.jdbcdriver <- paste0(path.jdbcdriver, c("terajdbc4.jar", "tdgssconfig.jar"), collapse = ";")
+    C&#35; for this to work on a unix-like OS, class path needs to be added:
+    .jclassPath()  ## check class path
+    .jaddClassPath(paste0(path.jdbcdriver, "terajdbc4.jar"))
+    .jaddClassPath(paste0(path.jdbcdriver, "tdgssconfig.jar"))
