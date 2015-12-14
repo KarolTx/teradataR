@@ -1,4 +1,4 @@
-tdConnect <- function(dsn, uid = "", pwd = "", database = "", dType = "odbc") {
+tdConnect <- function(dsn, uid = "", pwd = "", database = "", dType = "odbc", params = "") {
     if (dType == "odbc") {
         require(RODBC)
         st <- paste("DSN=", dsn, sep = "")
@@ -15,13 +15,24 @@ tdConnect <- function(dsn, uid = "", pwd = "", database = "", dType = "odbc") {
     
     if (dType == "jdbc") {
         require(RJDBC)
+
         drv <- JDBC("com.teradata.jdbc.TeraDriver")
-        st <- paste("jdbc:teradata://", dsn, sep = "")
-        if (nchar(database)) 
-            st <- paste(st, "/database=", database, sep = "")
+        st <- paste0("jdbc:teradata://", dsn, "/")
+
+        if (nchar(database)) {
+            st <- paste0(st, "database=", database)
+        }
+
+        if (nchar(params)) {
+            if (substring(st, nchar(st)) != "/") {
+                st <- paste0(st, ",")
+            }
+
+            st <- paste0(st, params)
+        }
+
         tdConnection <- dbConnect(drv, st, user = uid, password = pwd)
         assign("tdConnection", tdConnection, envir = .GlobalEnv)
         invisible(tdConnection)
     }
 }
- 
